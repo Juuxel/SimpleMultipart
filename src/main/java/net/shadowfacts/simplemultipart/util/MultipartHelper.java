@@ -6,15 +6,13 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.state.PropertyContainer;
 import net.minecraft.state.StateFactory;
 import net.minecraft.state.property.Property;
-import net.minecraft.util.BlockHitResult;
-import net.minecraft.util.HitResult;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
 import net.shadowfacts.simplemultipart.SimpleMultipart;
 import net.shadowfacts.simplemultipart.container.MultipartContainer;
 import net.shadowfacts.simplemultipart.multipart.Multipart;
@@ -44,7 +42,7 @@ public class MultipartHelper {
 		float var6 = MathHelper.lerp(1.0F, player.prevPitch, player.pitch);
 		float var7 = MathHelper.lerp(1.0F, player.prevYaw, player.yaw);
 		double var8 = MathHelper.lerp(1.0D, player.prevX, player.x);
-		double var10 = MathHelper.lerp(1.0D, player.prevY, player.y) + (double)player.getEyeHeight();
+		double var10 = MathHelper.lerp(1.0D, player.prevY, player.y) + (double)player.getEyeHeight(player.getPose());
 		double var12 = MathHelper.lerp(1.0D, player.prevZ, player.z);
 		Vec3d start = new Vec3d(var8, var10, var12);
 

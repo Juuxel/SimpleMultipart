@@ -1,8 +1,8 @@
 package net.shadowfacts.simplemultipart.container;
 
 import com.google.common.collect.ImmutableSet;
+import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.fabricmc.fabric.api.util.NbtType;
-import net.fabricmc.fabric.block.entity.ClientSerializable;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -20,7 +20,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.World;
 import net.minecraft.world.loot.context.LootContext;
-import net.minecraft.world.loot.context.Parameters;
+import net.minecraft.world.loot.context.LootContextParameters;
 import net.shadowfacts.simplemultipart.SimpleMultipart;
 import net.shadowfacts.simplemultipart.multipart.Multipart;
 import net.shadowfacts.simplemultipart.multipart.MultipartState;
@@ -36,7 +36,7 @@ import java.util.stream.Collectors;
 /**
  * @author shadowfacts
  */
-public abstract class AbstractContainerBlockEntity extends BlockEntity implements MultipartContainer, ClientSerializable {
+public abstract class AbstractContainerBlockEntity extends BlockEntity implements MultipartContainer, BlockEntityClientSerializable {
 
 	protected Set<Entry> parts = new HashSet<>();
 	protected Map<Direction, Entry> sidePartCache = new WeakHashMap<>();
@@ -204,7 +204,7 @@ public abstract class AbstractContainerBlockEntity extends BlockEntity implement
 		LootContext.Builder builder = new LootContext.Builder(world);
 		builder.setRandom(world.random);
 		builder.put(SimpleMultipart.MULTIPART_STATE_PARAMETER, e.state);
-		builder.put(Parameters.POSITION, pos);
+		builder.put(LootContextParameters.POSITION, pos);
 		return e.state.getDroppedStacks(e, builder);
 	}
 

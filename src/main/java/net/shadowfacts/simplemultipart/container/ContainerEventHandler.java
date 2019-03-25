@@ -1,6 +1,6 @@
 package net.shadowfacts.simplemultipart.container;
 
-import net.fabricmc.fabric.events.PlayerInteractionEvent;
+import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ActionResult;
@@ -18,7 +18,7 @@ import net.shadowfacts.simplemultipart.util.MultipartHelper;
 public class ContainerEventHandler {
 
 	public static void register() {
-		PlayerInteractionEvent.ATTACK_BLOCK.register(ContainerEventHandler::handleBlockAttack);
+		AttackBlockCallback.EVENT.register(ContainerEventHandler::handleBlockAttack);
 	}
 
 	private static ActionResult handleBlockAttack(PlayerEntity player, World world, Hand hand, BlockPos pos, Direction direction) {
@@ -33,16 +33,16 @@ public class ContainerEventHandler {
 
 		MultipartContainer container = (MultipartContainer)world.getBlockEntity(pos);
 		if (container == null) {
-			return ActionResult.FAILURE;
+			return ActionResult.FAIL;
 		}
 
 		MultipartHitResult hit = MultipartHelper.rayTrace(container, world, pos, player);
 		if (hit == null) {
-			return ActionResult.FAILURE;
+			return ActionResult.FAIL;
 		}
 
 		boolean success = container.breakPart(hit.view, player);
-		return success ? ActionResult.SUCCESS : ActionResult.FAILURE;
+		return success ? ActionResult.SUCCESS : ActionResult.FAIL;
 	}
 
 }

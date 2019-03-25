@@ -5,7 +5,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.BlockHitResult;
+import net.minecraft.util.hit.BlockHitResult;
 import net.shadowfacts.simplemultipart.SimpleMultipart;
 import net.shadowfacts.simplemultipart.container.AbstractContainerBlockEntity;
 import net.shadowfacts.simplemultipart.container.MultipartContainer;
@@ -69,7 +69,7 @@ public class MultipartItem extends Item {
 		}
 
 		// Otherwise, get or create a new container and try inserting into that
-		BlockHitResult offsetHitResult = new BlockHitResult(context.method_17698(), context.getFacing(), context.getPos().offset(context.getFacing()), context.method_17699());
+		BlockHitResult offsetHitResult = new BlockHitResult(context.getPos(), context.getFacing(), context.getBlockPos().offset(context.getFacing()), context.method_17699());
 		ItemUsageContext offsetContext = new ItemUsageContext(context.getPlayer(), context.getItemStack(), offsetHitResult);
 		MultipartContainer offsetContainer = getOrCreateContainer(offsetContext);
 		if (offsetContainer != null) {
@@ -78,18 +78,18 @@ public class MultipartItem extends Item {
 			} else {
 				// if the a new container was created, and no part was inserted, remove the empty container
 				if (!offsetContainer.hasParts()) {
-					context.getWorld().setBlockState(offsetContext.getPos(), Blocks.AIR.getDefaultState());
+					context.getWorld().setBlockState(offsetContext.getBlockPos(), Blocks.AIR.getDefaultState());
 				}
 			}
 		}
 
-		return ActionResult.FAILURE;
+		return ActionResult.FAIL;
 	}
 
 	protected MultipartContainer getContainer(ItemUsageContext context) {
-		BlockState state = context.getWorld().getBlockState(context.getPos());
+		BlockState state = context.getWorld().getBlockState(context.getBlockPos());
 		if (state.getBlock() == SimpleMultipart.containerBlock) {
-			return (MultipartContainer)context.getWorld().getBlockEntity(context.getPos());
+			return (MultipartContainer)context.getWorld().getBlockEntity(context.getBlockPos());
 		} else {
 			return null;
 		}
@@ -98,10 +98,10 @@ public class MultipartItem extends Item {
 	protected MultipartContainer getOrCreateContainer(ItemUsageContext context) {
 		MultipartContainer container = getContainer(context);
 		if (container == null) {
-			BlockState existing = context.getWorld().getBlockState(context.getPos());
+			BlockState existing = context.getWorld().getBlockState(context.getBlockPos());
 			if (existing.isAir()) { // TODO: should check is replaceable (might not be mapped?)
-				context.getWorld().setBlockState(context.getPos(), SimpleMultipart.containerBlock.getDefaultState());
-				container = (MultipartContainer)context.getWorld().getBlockEntity(context.getPos());
+				context.getWorld().setBlockState(context.getBlockPos(), SimpleMultipart.containerBlock.getDefaultState());
+				container = (MultipartContainer)context.getWorld().getBlockEntity(context.getBlockPos());
 			}
 		}
 		return container;

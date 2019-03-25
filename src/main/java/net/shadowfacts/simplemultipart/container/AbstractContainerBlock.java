@@ -1,13 +1,12 @@
 package net.shadowfacts.simplemultipart.container;
 
-import net.fabricmc.fabric.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.entity.VerticalEntityPosition;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.BlockHitResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
@@ -17,7 +16,6 @@ import net.shadowfacts.simplemultipart.client.util.RenderStateProvider;
 import net.shadowfacts.simplemultipart.util.MultipartHelper;
 import net.shadowfacts.simplemultipart.util.MultipartHitResult;
 import net.shadowfacts.simplemultipart.multipart.MultipartView;
-import net.shadowfacts.simplemultipart.util.ShapeUtils;
 
 import java.util.Set;
 
@@ -86,6 +84,7 @@ public abstract class AbstractContainerBlock extends Block implements BlockEntit
 		return getCombinedShape(world, pos);
 	}
 
+	/*
 	@Override
 	@Deprecated
 	public boolean hasSolidTopSurface(BlockState state, BlockView world, BlockPos pos) {
@@ -100,6 +99,7 @@ public abstract class AbstractContainerBlock extends Block implements BlockEntit
 					return ShapeUtils.hasSolidSide(shape, Direction.UP);
 				});
 	}
+	*/
 
 	@Override
 	public abstract AbstractContainerBlockEntity createBlockEntity(BlockView world);

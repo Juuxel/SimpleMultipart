@@ -3,7 +3,6 @@
   "package": "net.shadowfacts.simplemultipart.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "MixinLootContextTypes"
   ],
   "injectors": {
     "defaultRequire": 1

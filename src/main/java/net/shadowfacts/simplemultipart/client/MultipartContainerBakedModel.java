@@ -76,11 +76,11 @@ public class MultipartContainerBakedModel implements BakedModel {
 
 	@Override
 	public ModelTransformation getTransformation() {
-		return ModelTransformation.ORIGIN;
+		return ModelTransformation.NONE;
 	}
 
 	@Override
 	public ModelItemPropertyOverrideList getItemPropertyOverrides() {
-		return ModelItemPropertyOverrideList.ORIGIN;
+		return ModelItemPropertyOverrideList.EMPTY;
 	}
 }

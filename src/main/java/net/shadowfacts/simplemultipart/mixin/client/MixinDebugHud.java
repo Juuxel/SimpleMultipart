@@ -4,8 +4,8 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.DebugHud;
 import net.minecraft.state.property.Property;
-import net.minecraft.util.BlockHitResult;
-import net.minecraft.util.HitResult;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.hit.HitResult;
 import net.shadowfacts.simplemultipart.SimpleMultipart;
 import net.shadowfacts.simplemultipart.container.MultipartContainer;
 import net.shadowfacts.simplemultipart.multipart.Multipart;
@@ -33,7 +33,7 @@ public abstract class MixinDebugHud {
 	private HitResult blockHit;
 
 	@Shadow
-	public abstract String method_1845(Map.Entry<Property<?>, Comparable<?>> map$Entry_1);
+	public abstract String propertyToString(Map.Entry<Property<?>, Comparable<?>> map$Entry_1);
 
 	@Inject(method = "getRightText", at = @At("RETURN"))
 	public void getRightText(CallbackInfoReturnable<List<String>> info) {
@@ -50,7 +50,7 @@ public abstract class MixinDebugHud {
 					Multipart part = state.getMultipart();
 					info.getReturnValue().add(String.valueOf(SimpleMultipart.MULTIPART.getId(part)));
 					for (Map.Entry<Property<?>, Comparable<?>> e : state.getEntries().entrySet()) {
-						info.getReturnValue().add(method_1845(e));
+						info.getReturnValue().add(propertyToString(e));
 					}
 				}
 			}

@@ -6,6 +6,7 @@ import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.profiler.Profiler;
 import net.shadowfacts.simplemultipart.client.MultipartContainerBakedModel;
 import net.shadowfacts.simplemultipart.client.SimpleMultipartClient;
 import org.spongepowered.asm.mixin.Mixin;
@@ -26,7 +27,7 @@ public abstract class MixinModelLoader {
 	private Map<Identifier, BakedModel> bakedModels;
 
 	@Inject(method = "<init>", at = @At("RETURN"))
-	public void addMultipartModel(ResourceManager manager, SpriteAtlasTexture texture, CallbackInfo info) {
+	public void addMultipartModel(ResourceManager manager, SpriteAtlasTexture texture, Profiler profiler, CallbackInfo info) {
 		bakedModels.put(new ModelIdentifier("simplemultipart:container#"), new MultipartContainerBakedModel());
 		bakedModels.put(new ModelIdentifier("simplemultipart:tickable_container#"), new MultipartContainerBakedModel());
 	}
