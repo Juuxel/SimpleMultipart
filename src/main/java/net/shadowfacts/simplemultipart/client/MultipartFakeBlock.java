@@ -37,7 +37,7 @@ public class MultipartFakeBlock extends Block {
 
 	private StateFactory<Block, BlockState> createFakeStateFactory() {
 		StateFactory.Builder<Block, BlockState> builder = new StateFactory.Builder<>(this);
-		multipart.getStateFactory().getProperties().forEach(builder::with);
+		multipart.getStateFactory().getProperties().forEach(builder::add);
 		return builder.build(BlockState::new);
 	}
 

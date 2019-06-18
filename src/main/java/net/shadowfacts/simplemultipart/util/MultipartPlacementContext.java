@@ -20,13 +20,13 @@ public class MultipartPlacementContext extends ItemUsageContext {
 	private final boolean isOffset;
 
 	public MultipartPlacementContext(MultipartContainer container, boolean isOffset, PlayerEntity player, ItemStack stack, BlockHitResult hitResult) {
-		super(player, stack, hitResult);
+		super(player.world, player, player.preferredHand, stack, hitResult);
 		this.container = container;
 		this.isOffset = isOffset;
 	}
 
 	public MultipartPlacementContext(MultipartContainer container, boolean isOffset, ItemUsageContext context) {
-		this(container, isOffset, context.getPlayer(), context.getItemStack(), new BlockHitResult(context.getPos(), context.getFacing(), context.getBlockPos(), context.method_17699()));
+		this(container, isOffset, context.getPlayer(), context.getStack(), new BlockHitResult(context.getHitPos(), context.getSide(), context.getBlockPos(), context.method_17699()));
 	}
 
 	/**

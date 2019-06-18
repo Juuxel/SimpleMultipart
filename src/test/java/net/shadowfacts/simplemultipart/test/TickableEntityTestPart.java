@@ -1,7 +1,7 @@
 package net.shadowfacts.simplemultipart.test;
 
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.text.StringTextComponent;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Tickable;
 import net.minecraft.util.math.Direction;
@@ -22,14 +22,14 @@ public class TickableEntityTestPart extends Multipart implements MultipartEntity
 	@Override
 	@Deprecated
 	public VoxelShape getBoundingShape(MultipartState state, MultipartView view) {
-		return VoxelShapes.cube(6/16f, 6/16f, 6/16f, 10/16f, 10/16f, 10/16f);
+		return VoxelShapes.cuboid(6/16f, 6/16f, 6/16f, 10/16f, 10/16f, 10/16f);
 	}
 
 	@Override
 	@Deprecated
 	public boolean activate(MultipartView view, Direction side, PlayerEntity player, Hand hand) {
 		int timer = ((Entity)view.getEntity()).timer;
-		player.addChatMessage(new StringTextComponent("Timer: " + timer), false);
+		player.addChatMessage(new TextComponent("Timer: " + timer), false);
 		System.out.println("hit side: " + side);
 		return true;
 	}

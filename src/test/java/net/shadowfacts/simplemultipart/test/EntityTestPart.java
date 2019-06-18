@@ -1,7 +1,7 @@
 package net.shadowfacts.simplemultipart.test;
 
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.text.StringTextComponent;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -23,14 +23,14 @@ public class EntityTestPart extends Multipart implements MultipartEntityProvider
 	@Override
 	@Deprecated
 	public VoxelShape getBoundingShape(MultipartState state, MultipartView view) {
-		return VoxelShapes.cube(6/16f, 6/16f, 6/16f, 10/16f, 10/16f, 10/16f);
+		return VoxelShapes.cuboid(6/16f, 6/16f, 6/16f, 10/16f, 10/16f, 10/16f);
 	}
 
 	@Override
 	@Deprecated
 	public boolean activate(MultipartView view, Direction side, PlayerEntity player, Hand hand) {
 		BlockPos pos = ((Entity)view.getEntity()).getPos();
-		player.addChatMessage(new StringTextComponent("Clicked: " + pos), false);
+		player.addChatMessage(new TextComponent("Clicked: " + pos), false);
 		return true;
 	}
 

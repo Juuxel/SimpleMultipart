@@ -1,18 +1,15 @@
 {
+  "schemaVersion": 1,
   "id": "simplemultipart",
   "name": "Simple Multipart",
   "description": "A simple multipart API for Fabric.",
   "version": "0.1.0",
-  "side": "universal",
-  "initializers": [
-    "net.shadowfacts.simplemultipart.SimpleMultipart",
-    "net.shadowfacts.simplemultipart.client.SimpleMultipartClient"
-  ],
+  "entrypoints": {
+    "main": ["net.shadowfacts.simplemultipart.SimpleMultipart"],
+    "client": ["net.shadowfacts.simplemultipart.client.SimpleMultipartClient"]
+  },
   "requires": {
     "fabric": "*"
   },
-  "mixins": {
-    "client": "simplemultipart.client.json",
-    "common": "simplemultipart.common.json"
-  }
+  "mixins": [ "mixins.simplemultipart.json" ]
 }

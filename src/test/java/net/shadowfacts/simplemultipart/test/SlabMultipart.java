@@ -16,10 +16,10 @@ import net.shadowfacts.simplemultipart.multipart.MultipartView;
  */
 public class SlabMultipart extends Multipart {
 
-	public static final EnumProperty<BlockHalf> HALF = EnumProperty.create("half", BlockHalf.class);
+	public static final EnumProperty<BlockHalf> HALF = EnumProperty.of("half", BlockHalf.class);
 
-	private static final VoxelShape LOWER_BOX = VoxelShapes.cube(0, 0, 0, 1, 0.5f, 1);
-	private static final VoxelShape UPPER_BOX = VoxelShapes.cube(0, 0.5f, 0, 1, 1, 1);
+	private static final VoxelShape LOWER_BOX = VoxelShapes.cuboid(0, 0, 0, 1, 0.5f, 1);
+	private static final VoxelShape UPPER_BOX = VoxelShapes.cuboid(0, 0.5f, 0, 1, 1, 1);
 
 	public SlabMultipart() {
 		setDefaultState(getDefaultState().with(HALF, BlockHalf.BOTTOM));
@@ -28,15 +28,15 @@ public class SlabMultipart extends Multipart {
 	@Override
 	protected void appendProperties(StateFactory.Builder<Multipart, MultipartState> builder) {
 		super.appendProperties(builder);
-		builder.with(HALF);
+		builder.add(HALF);
 	}
 
 	@Override
 	public MultipartState getPlacementState(MultipartPlacementContext context) {
-		Direction hitSide = context.getFacing();
+		Direction hitSide = context.getSide();
 		BlockHalf half;
 
-		double absoluteHitY = context.getPos().y; // method_17698 returns an absolutely position vector (i.e. in the world's coordinate space)
+		double absoluteHitY = context.getHitPos().y; // method_17698 returns an absolutely position vector (i.e. in the world's coordinate space)
 		double relativeHitY = absoluteHitY - Math.floor(absoluteHitY); // this converts it to the block's coordinate space (e.g. 4.5 - Math.floor(4.5) = 0.5)
 		if (hitSide == Direction.DOWN) {
 			half = relativeHitY >= 0.5f ? BlockHalf.BOTTOM : BlockHalf.TOP;

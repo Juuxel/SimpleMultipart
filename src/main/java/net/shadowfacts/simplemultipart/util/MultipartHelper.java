@@ -106,7 +106,7 @@ public class MultipartHelper {
 	}
 
 	private static <C extends PropertyContainer<C>, T extends Comparable<T>> String getValueAsString(C state, Property<T> property) {
-		return property.getValueAsString(state.get(property));
+		return property.getName(state.get(property));
 	}
 
 	/**

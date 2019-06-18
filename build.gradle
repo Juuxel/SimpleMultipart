@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '0.2.0-SNAPSHOT'
+	id 'fabric-loom' version '0.2.4-SNAPSHOT'
 }
 
 sourceCompatibility = 1.8
@@ -9,7 +9,7 @@ archivesBaseName = "SimpleMultipart"
 group = "net.shadowfacts.simplemultipart"
 version = "0.1.3"
 
-apply from: "https://raw.githubusercontent.com/shadowfacts/maven/master/maven.gradle"
+//apply from: "https://raw.githubusercontent.com/shadowfacts/maven/master/maven.gradle"
 
 minecraft {
 }
@@ -19,12 +19,12 @@ repositories {
 }
 
 dependencies {
-	minecraft "com.mojang:minecraft:19w12b"
-	mappings "net.fabricmc:yarn:19w12b.7"
-	modCompile "net.fabricmc:fabric-loader:0.3.7.109"
+	minecraft "com.mojang:minecraft:1.14.2"
+	mappings "net.fabricmc:yarn:1.14.2+build.7"
+	modCompile "net.fabricmc:fabric-loader:0.4.8+build.155"
 	
 	// Fabric API. This is technically optional, but you probably want it anyway.
-	modCompile "net.fabricmc:fabric:0.2.5.114"
+	modCompile "net.fabricmc.fabric-api:fabric-api:0.3.0+build.185"
 }
 
 // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task

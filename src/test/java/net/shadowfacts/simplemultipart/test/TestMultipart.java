@@ -24,12 +24,12 @@ public class TestMultipart extends Multipart {
 	@Override
 	protected void appendProperties(StateFactory.Builder<Multipart, MultipartState> builder) {
 		super.appendProperties(builder);
-		builder.with(Properties.FACING);
+		builder.add(Properties.FACING);
 	}
 
 	@Override
 	public MultipartState getPlacementState(MultipartPlacementContext context) {
-		Direction hitSide = context.getFacing();
+		Direction hitSide = context.getSide();
 		return getDefaultState().with(Properties.FACING, hitSide.getOpposite());
 	}
 
@@ -39,17 +39,17 @@ public class TestMultipart extends Multipart {
 		Direction side = state.get(Properties.FACING);
 		switch (side) {
 			case UP:
-				return VoxelShapes.cube(0, 15/16f, 0, 1, 1, 1);
+				return VoxelShapes.cuboid(0, 15/16f, 0, 1, 1, 1);
 			case DOWN:
-				return VoxelShapes.cube(0, 0, 0, 1, 1/16f, 1);
+				return VoxelShapes.cuboid(0, 0, 0, 1, 1/16f, 1);
 			case NORTH:
-				return VoxelShapes.cube(0, 0, 0, 1, 1, 1/16f);
+				return VoxelShapes.cuboid(0, 0, 0, 1, 1, 1/16f);
 			case SOUTH:
-				return VoxelShapes.cube(0, 0, 15/16f, 1, 1, 1);
+				return VoxelShapes.cuboid(0, 0, 15/16f, 1, 1, 1);
 			case WEST:
-				return VoxelShapes.cube(0, 0, 0, 1/16f, 1, 1);
+				return VoxelShapes.cuboid(0, 0, 0, 1/16f, 1, 1);
 			case EAST:
-				return VoxelShapes.cube(15/16f, 0, 0, 1, 1, 1);
+				return VoxelShapes.cuboid(15/16f, 0, 0, 1, 1, 1);
 		}
 		return VoxelShapes.empty();
 	}

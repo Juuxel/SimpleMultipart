@@ -87,7 +87,7 @@ public class MultipartVariantProvider implements ModelVariantProvider  {
 		ModelVariantMap variantMap = loadPartVariantMap(blockAdapter, partStateDefId);
 
 		if (variantMap.hasMultipartModel()) {
-			MultipartUnbakedModel multipartUnbakedModel = variantMap.getMultipartMdoel();
+			MultipartUnbakedModel multipartUnbakedModel = variantMap.getMultipartModel();
 			part.getStateFactory().getStates().forEach(state -> {
 				ModelIdentifier stateModelId = new ModelIdentifier(partId, BlockModels.propertyMapToString(state.getEntries()));
 				unbakedModels.put(stateModelId, multipartUnbakedModel);
